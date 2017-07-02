@@ -7,7 +7,7 @@
 <title>网上书城主页</title>
 </head>
 <frameset rows="80,*">
-		<%=request.getParameter("uid")%>
+		
         <frame src="ShopIndexTitle.jsp" scrolling="no">
         <frameset cols="140,*">
              <frame src="ShopIndexLeft.jsp" scrolling="no">

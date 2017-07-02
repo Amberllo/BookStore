@@ -29,8 +29,8 @@ public class User {
 	}
 
    public User(){}                  //缺省的构造方法
-   public User(String uname,String uid,String upsw){   //带参数的构造方法
-          username=uname;userid=uid;userpsw=upsw;
+   public User(String uname,String upsw){   //带参数的构造方法
+          username=uname;userpsw=upsw;
    		}
    
    public boolean zhuce_user(String Uname,String Uid,String Upsw) throws SQLException, ClassNotFoundException{
@@ -55,25 +55,27 @@ public class User {
 }
    //实现验证判定，当输入的用户信息正确，返回true,
    
-   public boolean yanzheng_user(String Uname,String Uid,String Upsw) throws SQLException, ClassNotFoundException{
+   public String yanzheng_user(String Uname,String Upsw) throws SQLException, ClassNotFoundException, ValidateException{
 	      ConnectDbase cdb=new ConnectDbase();
 	      Connection conn = cdb.getConnect(); 
-	      String  sql="select * from shopuser  where(user_ID=? and user_PSW=?)";
+	      String  sql="select * from shopuser  where(user_NAME=? and user_PSW=?)";
 	      PreparedStatement pstmt= conn.prepareStatement(sql);
-	      pstmt.setString(1,Uid);
+	      pstmt.setString(1,Uname);
 	      pstmt.setString(2,Upsw);
 	      ResultSet  rs=pstmt.executeQuery();  
 	      if(rs.next()){ 
+	    	  String userid = rs.getString("user_ID");
+	    	  
 	    	  if(rs!=null)rs.close();   
 		      if(pstmt!=null)pstmt.close();
 		      if(conn!=null)conn.close(); 
-		      return true;	    	  
+		      return userid;	   	  
 	      } 
 	      else{
 	    	  if(rs!=null)rs.close();   
 		      if(pstmt!=null)pstmt.close();
 		      if(conn!=null)conn.close(); 
-		      return false;	   	  
+		      throw new ValidateException();	   	  
 	      } 
    }
    

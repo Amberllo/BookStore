@@ -31,17 +31,20 @@ public class Submit extends HttpServlet {
 		request.setCharacterEncoding("GB2312"); 
         String name=request.getParameter("username");
         String psw=request.getParameter("userpsw");
-        String id=request.getParameter("userid");
-        User yanzheng=new User(name,id,psw);
+//        String id=request.getParameter("userid");
 	    try {
-	        	if(yanzheng.yanzheng_user(yanzheng.getUsername(),yanzheng.getUserid(),yanzheng.getUserpsw()))	        	
-	        		request.getRequestDispatcher("SubmitSuccess.jsp").forward(request,response);	
-	        	else
-	        		request.getRequestDispatcher("SubmitError.jsp").forward(request,response);
+	    	String userid = new User(name,psw).yanzheng_user(name,psw);
+	    	request.getSession().setAttribute("userid", userid);
+	        request.getRequestDispatcher("SubmitSuccess.jsp").forward(request,response);	
+	        		
 		} 
-	    catch (ClassNotFoundException|SQLException e) {			
+	    catch (ClassNotFoundException|SQLException e ) {			
 			e.printStackTrace();
-		}  
+			request.getRequestDispatcher("SubmitError.jsp").forward(request,response);
+		} catch(ValidateException e){
+			e.printStackTrace();
+			request.getRequestDispatcher("SubmitError.jsp").forward(request,response);
+		}
 	}
 
 	/**
