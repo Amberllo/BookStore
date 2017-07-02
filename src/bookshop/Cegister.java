@@ -20,7 +20,7 @@ public class Cegister extends HttpServlet {
 		request.setCharacterEncoding("GB2312"); 
         String name=request.getParameter("username");
         String psw=request.getParameter("userpsw");
-        String id= String.valueOf(new Random().nextInt(10000));
+        String id= String.valueOf(new Random().nextInt(1000000));
         if(name==null||psw==null||id==null)
         	
         	request.getRequestDispatcher("CegisterError.jsp").forward(request,response);

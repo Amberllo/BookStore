@@ -12,12 +12,14 @@ public class Book {
 	public String bookId;
 	public String bookName;
 	public String introduce;
-	public String  price;
+	public String book_PRICE;
 	
 	
 	public List<Book> findByName(String name) throws SQLException, ClassNotFoundException{
 		List<Book> list = new ArrayList<Book>();
-		
+		if(name==null || name.equals("")){
+			name = "";
+        }
 		ConnectDbase cdb=new ConnectDbase();
 	      Connection conn = cdb.getConnect(); 
 	      String sql = "select b.*,c.* from book as b left join bookclass as c on b.class_ID = c.class_ID WHERE b.book_NAME LIKE '%"+name+"%'";
@@ -28,7 +30,7 @@ public class Book {
 	    	  Book book = new Book();
 	    	  book.bookName = set.getString("book_NAME") ; 
 	    	  book.bookId = set.getString("book_ID"); 
-	    	  book.price = set.getString("book_PRICE"); 
+	    	  book.book_PRICE = set.getString("book_PRICE"); 
 	    	  list.add(book);
     	  } 
 	      if(pstmt!=null)pstmt.close();

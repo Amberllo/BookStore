@@ -9,7 +9,22 @@
 <title></title>
 </head>
 <body>
-	<%=request.getParameter("bookid")%>
-	<%=request.getParameter("bookname")%>
+	<%
+		String userid = (String)session.getAttribute("userid");	
+		String bookId = request.getParameter("bookid");
+		String bookName = request.getParameter("bookName"); 
+		String bookPrice = request.getParameter("bookPrice"); 
+	%>
+	
+	
+	<form  action="TrolleyServlet1" method="post">
+	
+		<input type="hidden" name="bookid" value="<%=bookId%>"><br><br> 	
+		<input type="hidden" name="userid" value="<%=userid%>"><br><br> 
+		书名：<input type="text" name="bookName" value="<%=bookName%>"><br><br>
+		单价：<input type="text" readonly="1" name="bookPrice" value="<%=bookPrice%>"><br><br>
+                        购买数量<input type="text" name="bookCount" ><br><br>
+        <input type="submit" value="提交">
+	</form>
 </body>
 </html>

@@ -12,10 +12,9 @@
 	
 	<% String userid = (String)session.getAttribute("userid");	 %> 
 	<script type="text/javascript">
-		function addOrder(bookid,bookname){
-			
+		function addOrder(bookid,bookname,bookPrice){
 			document.getElementById("addOrderResult").innerHTML =bookid +"_加入购物车成功"
-			window.location.href= "FindBookTrolley.jsp?bookid="+bookid;
+			window.location.href= "FindBookTrolley.jsp?bookid="+bookid+"&&bookName="+bookname+"&&bookPrice="+bookPrice;
 		}
 		
 		
@@ -40,13 +39,12 @@
 	    List<Book> books = (List<Book>)request.getAttribute("list"); 
 	    if(books!=null){
 	    	for(Book book:books){       
-	    		out.print("<tr>");
+	    		out.print("<tr>\n");
 		    	out.print("<td>" + book.bookId + "</td>\n");
 		    	out.print("<td>" + book.bookName + "</td>\n");
-		    	out.print("<td>" + book.introduce + "</td>\n");
-		    	String location = "window.location.href='FindBookTrolley.jsp'";
-		    	out.print("<td> <input type='button' value='下订单' onclick='addOrder('"+book.bookId+"','"+book.bookName+"')' /></td>\n");
-		    	out.print("</tr>");
+		    	out.print("<td>" + book.book_PRICE + "</td>\n");
+		    	out.print("<td> <input type='button' value='下订单' onclick='addOrder(\""+book.bookId+"\",\""+book.bookName+"\",\""+book.book_PRICE+"\")' /></td>\n");
+		    	out.print("</tr>\n");
 			 }
 	    }
 	    

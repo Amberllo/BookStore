@@ -9,8 +9,8 @@
 <body>
 	<p><a href="FindBook.jsp" target="right">图书查询</a></p> 
     <p><a href="Trolley.jsp" target="right">我的购物车</a></p> 
-    <p><a href="OlineBuy.jsp" target="right">在线购书</a></p> 
-    <p><a href="MyOrder.jsp" target="right">查看订单</a></p>
+    <p><a href="/bookshop/BookServlet" target="right">在线购书</a></p> 
+    <p><a href="/bookshop/OrderListServlet?userid=<%= session.getAttribute("userid") %>" target="right">查看订单</a></p>
     <p> <a href="MyCount.jsp" target="right">我的账户</a> </p>
 </body>
 </html>
